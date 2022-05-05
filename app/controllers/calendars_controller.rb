@@ -36,14 +36,25 @@ class CalendarsController < ApplicationController
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
 
-      wday_num = Date.today.wday
+      wday_num = Date.today.wday + x
       if wday_num >= 7
         wday_num = wday_num -7
       end
 
-      days = { :month => (@todays_date + x).month, :date => (@todays_date + x).day, :plans => today_plans, :wday => wdays[(wday_num + x)]}
+      days = { :month => (@todays_date + x).month, :date => (@todays_date + x).day, :plans => today_plans, :wday => wdays[wday_num]}
       @week_days.push(days)
     end
 
   end
 end
+
+
+# wdays[Date.today.wday + x]
+
+# 月曜日　火曜日　水曜日
+
+# 土曜日6　7nil nil nil 
+
+# Date.today.wday + x が７以上だったらどうにかしないといけないですよ〜
+
+# 土曜日6 日曜日7-7
